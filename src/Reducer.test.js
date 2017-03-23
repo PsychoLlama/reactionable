@@ -41,6 +41,12 @@ describe('Reducer', () => {
     expect(actionsObject).toNotThrow();
   });
 
+  it('throws if there are duplicate action types', () => {
+    const fail = () => Reducer([action, action]);
+
+    expect(fail).toThrow(new RegExp(action.type));
+  });
+
   describe('instance', () => {
     let state;
 

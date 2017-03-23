@@ -25,13 +25,6 @@ describe('Action', () => {
     expect(action.reducer).toBe(reducer);
   });
 
-  it('contains the scope selector', () => {
-    const scope = () => {};
-    const action = Action(type, {scope, reducer});
-
-    expect(action.scope).toBe(scope);
-  });
-
   it('returns an action creator', () => {
     const action = Action(type, {reducer});
 

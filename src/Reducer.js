@@ -29,16 +29,23 @@ const assertIsNotSingleAction = (value) => {
 /**
  * Turns a collection of actions into a reducer map.
  * @param  {Object|Array} actions - Collection of actions.
- * @return {Object} - Reducers mapped by their types.
+ * @throws {Error} - If there are duplicate action types.
+ * @return {Object} - Actions mapped by their types.
  */
-const createReducerMap = (actions) => {
+const createActionMap = (actions) => {
   const map = {};
 
   // Allow interop with objects of actions.
   Object.keys(actions).forEach((key) => {
     const action = actions[key];
 
-    map[action.type] = action.reducer;
+    if (map.hasOwnProperty(action.type)) {
+      throw new Error(
+        `Reducer(...) given two actions with the same type: "${action.type}"`
+      );
+    }
+
+    map[action.type] = action;
   });
 
   return map;
@@ -54,16 +61,16 @@ export default (actions) => {
   assertIsNotSingleAction(actions);
 
   // Turn the collection of actions into a type map.
-  const reducers = createReducerMap(actions);
+  const actionMap = createActionMap(actions);
 
   return (state, action) => {
-    const reducer = reducers[action.type];
+    const config = actionMap[action.type];
 
     // No matching reducer.
-    if (!reducer) {
+    if (!config) {
       return state;
     }
 
-    return reducer(state, action);
+    return config.reducer(state, action);
   };
 };

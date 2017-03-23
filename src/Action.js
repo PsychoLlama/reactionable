@@ -48,14 +48,13 @@ const assertIsReducer = (value) => {
  * @param  {Object} config - Action configuration.
  * @param  {Function} config.creator - Action creator (type implied).
  * @param  {Function} config.reducer - Coupled state reducer.
- * @param  {Function} [config.scope] - Selects state (scope) for the reducer.
  * @return {Function} - Action creator.
  */
 export default (type, config) => {
   assertHasType(type);
   assertIsObject(config);
 
-  const {reducer, scope, creator = spreadPayload} = config;
+  const {reducer, creator = spreadPayload} = config;
   assertIsReducer(reducer);
 
   const action = (...args) => ({
@@ -66,7 +65,6 @@ export default (type, config) => {
   // For consumption by `Reducer`.
   action.type = type;
   action.reducer = reducer;
-  action.scope = scope;
 
   return action;
 };
