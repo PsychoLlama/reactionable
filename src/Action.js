@@ -15,6 +15,20 @@ const assertIsObject = (value) => {
 };
 
 /**
+ * Throws if no action type is given.
+ * @param  {Any} value - An action type.
+ * @throws {TypeError}
+ * @return {undefined}
+ */
+const assertHasType = (type) => {
+  if (!type) {
+    throw new TypeError(
+      `Action(...) expected an action type, was given "${type}"`
+    );
+  }
+};
+
+/**
  * Throws if the reducer is not a function.
  * @param  {Any} value - The config.
  * @throws {TypeError}
@@ -38,6 +52,7 @@ const assertIsReducer = (value) => {
  * @return {Function} - Action creator.
  */
 export default (type, config) => {
+  assertHasType(type);
   assertIsObject(config);
 
   const {reducer, scope, creator = spreadPayload} = config;

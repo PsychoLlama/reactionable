@@ -52,6 +52,10 @@ describe('Action', () => {
     expect(() => Action(type)).toThrow();
   });
 
+  it('throws if no type is given', () => {
+    expect(() => Action(undefined, {reducer})).toThrow(/type/);
+  });
+
   it('spreads the first argument if no creator is given', () => {
     const action = Action(type, {reducer});
     const value = {
