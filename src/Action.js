@@ -16,7 +16,7 @@ const assertIsObject = (value) => {
 
 /**
  * Throws if no action type is given.
- * @param  {Any} value - An action type.
+ * @param  {Any} type - An action type.
  * @throws {TypeError}
  * @return {undefined}
  */

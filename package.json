@@ -1,10 +1,13 @@
 {
   "name": "reactionable",
   "version": "0.1.0",
-  "description": "Redux actions coupled with their reducers",
+  "description": "Unceremonious redux actions",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha 'src/**/*test.js' --opts mocha.opts"
+    "test": "mocha 'src/**/*test.js' --opts mocha.opts",
+    "babel": "babel src/ -d dist/",
+    "lint": "eslint src",
+    "prepublish": "npm run babel"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,7 @@
   },
   "homepage": "https://github.com/PsychoLlama/reactionable#readme",
   "devDependencies": {
+    "babel-cli": "^6.24.0",
     "babel-eslint": "^7.2.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
