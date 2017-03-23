@@ -1,5 +1,7 @@
 const eslint = exports;
 
+eslint.parser = 'babel-eslint';
+
 eslint.extends = [
   'eslint:recommended',
   'llama',
